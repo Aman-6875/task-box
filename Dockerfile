@@ -59,6 +59,7 @@ RUN useradd -ms /bin/bash --no-user-group -g $WWWGROUP -u $WWWUSER sail
 COPY docker/start-container /usr/local/bin/start-container
 COPY docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY docker/php.ini /etc/php/8.5/cli/conf.d/99-sail.ini
+COPY --from=vendor /usr/bin/composer /usr/bin/composer
 RUN chmod +x /usr/local/bin/start-container
 
 # --- এখানেই আসল পার্থক্য: কোড এখন volume-mount না, সরাসরি image-এর ভেতরে bake হচ্ছে ---
