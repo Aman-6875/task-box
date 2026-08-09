@@ -56,9 +56,9 @@ RUN userdel -r ubuntu 2>/dev/null || true
 RUN groupadd --force -g $WWWGROUP sail
 RUN useradd -ms /bin/bash --no-user-group -g $WWWGROUP -u $WWWUSER sail
 
-COPY --from=vendor /app/vendor/laravel/sail/runtimes/8.5/start-container /usr/local/bin/start-container
-COPY --from=vendor /app/vendor/laravel/sail/runtimes/8.5/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-COPY --from=vendor /app/vendor/laravel/sail/runtimes/8.5/php.ini /etc/php/8.5/cli/conf.d/99-sail.ini
+COPY docker/start-container /usr/local/bin/start-container
+COPY docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+COPY docker/php.ini /etc/php/8.5/cli/conf.d/99-sail.ini
 RUN chmod +x /usr/local/bin/start-container
 
 # --- এখানেই আসল পার্থক্য: কোড এখন volume-mount না, সরাসরি image-এর ভেতরে bake হচ্ছে ---
