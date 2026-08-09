@@ -18,14 +18,29 @@
                         @if ($task->description)
                             <p class="mt-1 text-sm text-slate-500">{{ $task->description }}</p>
                         @endif
-                        <span @class([
-                            'mt-2 inline-block rounded-full px-2.5 py-0.5 text-xs font-medium',
-                            'bg-amber-100 text-amber-800' => $task->status->value === 'pending',
-                            'bg-blue-100 text-blue-800' => $task->status->value === 'in_progress',
-                            'bg-green-100 text-green-800' => $task->status->value === 'completed',
-                        ])>
-                            {{ str_replace('_', ' ', $task->status->value) }}
-                        </span>
+                        <div class="mt-2 flex flex-wrap items-center gap-2">
+                            <span @class([
+                                'inline-block rounded-full px-2.5 py-0.5 text-xs font-medium',
+                                'bg-amber-100 text-amber-800' => $task->status->value === 'pending',
+                                'bg-blue-100 text-blue-800' => $task->status->value === 'in_progress',
+                                'bg-green-100 text-green-800' => $task->status->value === 'completed',
+                            ])>
+                                {{ str_replace('_', ' ', $task->status->value) }}
+                            </span>
+
+                            <span @class([
+                                'inline-block rounded-full px-2.5 py-0.5 text-xs font-medium',
+                                'bg-slate-100 text-slate-600' => $task->priority->value === 'low',
+                                'bg-orange-100 text-orange-800' => $task->priority->value === 'medium',
+                                'bg-red-100 text-red-800' => $task->priority->value === 'high',
+                            ])>
+                                {{ ucfirst($task->priority->value) }} priority
+                            </span>
+
+                            @if ($task->due_date)
+                                <span class="text-xs text-slate-500">Due {{ $task->due_date->format('M j, Y') }}</span>
+                            @endif
+                        </div>
                     </div>
 
                     <div class="flex shrink-0 items-center gap-3 text-sm">

@@ -26,6 +26,31 @@
             @enderror
         </div>
 
+        <div class="flex gap-5">
+            <div class="flex-1">
+                <label for="priority" class="mb-1 block text-sm font-medium">Priority</label>
+                <select name="priority" id="priority" class="w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-slate-500 focus:outline-none">
+                    @foreach (['low', 'medium', 'high'] as $priority)
+                        <option value="{{ $priority }}" @selected(old('priority', 'medium') === $priority)>
+                            {{ ucfirst($priority) }}
+                        </option>
+                    @endforeach
+                </select>
+                @error('priority')
+                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                @enderror
+            </div>
+
+            <div class="flex-1">
+                <label for="due_date" class="mb-1 block text-sm font-medium">Due Date</label>
+                <input type="date" name="due_date" id="due_date" value="{{ old('due_date') }}"
+                    class="w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-slate-500 focus:outline-none">
+                @error('due_date')
+                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                @enderror
+            </div>
+        </div>
+
         <div class="flex items-center gap-3">
             <button type="submit" class="rounded-md bg-slate-900 px-4 py-2 text-sm font-medium text-white hover:bg-slate-700">
                 Create Task
