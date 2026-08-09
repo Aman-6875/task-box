@@ -1,14 +1,7 @@
 services:
     laravel.test:
-        build:
-            context: './vendor/laravel/sail/runtimes/8.5'
-            dockerfile: Dockerfile
-            args:
-                WWWGROUP: '${WWWGROUP}'
-        image: 'sail-8.5/app'
+        image: 'aman6875/task-box:latest'
         network_mode: host
-        environment:
-            WWWUSER: '${WWWUSER}'
-            LARAVEL_SAIL: 1
-        volumes:
-            - '.:/var/www/html'
+        env_file:
+            - .env
+        restart: unless-stopped
